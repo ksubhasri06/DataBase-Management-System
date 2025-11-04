@@ -1,0 +1,53 @@
+CREATE TABLE Students ( 
+StudentID INT PRIMARY KEY, 
+StudentName VARCHAR(255), 
+Major VARCHAR(255) 
+); 
+CREATE TABLE Courses ( 
+CourseID INT PRIMARY KEY, 
+CourseName VARCHAR(255), 
+Credits INT 
+); 
+CREATE TABLE Enrollments ( 
+StudentID INT, 
+CourseID INT, 
+EnrollmentDate DATE, 
+PRIMARY KEY (StudentID, CourseID), 
+FOREIGN KEY (StudentID) REFERENCES Students(StudentID), 
+FOREIGN KEY (CourseID) REFERENCES Courses(CourseID) 
+); 
+CREATE TABLE Instructors ( 
+InstructorID INT PRIMARY KEY, 
+InstructorName VARCHAR(255), 
+Phone VARCHAR(20) 
+); 
+CREATE TABLE Course_Instructors ( 
+CourseID INT, 
+InstructorID INT, 
+PRIMARY KEY (CourseID, InstructorID), 
+FOREIGN KEY (CourseID) REFERENCES Courses(CourseID), 
+FOREIGN KEY (InstructorID) REFERENCES Instructors(InstructorID) 
+); 
+INSERT INTO Students (StudentID, StudentName, Major) VALUES 
+(1, 'Alice Smith', 'Computer Science'), 
+(2, 'Bob Johnson', 'Mathematics'), 
+(3, 'Charlie Brown', 'Physics');
+INSERT INTO Courses (CourseID, CourseName, Credits) VALUES 
+(101, 'Introduction to Programming', 3), 
+(102, 'Calculus I', 4), 
+(103, 'Classical Mechanics', 3); 
+INSERT INTO Enrollments (StudentID, CourseID, EnrollmentDate) VALUES 
+(1, 101, '2024-09-01'), 
+(1, 102, '2024-09-01'), 
+(2, 102, '2024-09-01'), 
+(3, 103, '2024-09-01'); 
+INSERT INTO Instructors (InstructorID, InstructorName, Phone) VALUES 
+(1001, 'Dr. Emily White', '555-1234'), 
+(1002, 'Prof. David Green', '555-5678'); 
+INSERT INTO Course_Instructors (CourseID, InstructorID) VALUES 
+(101, 1001), 
+(102, 1002), 
+(103, 1002); 
+# Retrieve all students and their majors 
+SELECT StudentID, StudentName, Major 
+FROM Students; 
