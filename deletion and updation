@@ -1,0 +1,2 @@
+delete from students where rollno='24B11CS381';
+update students set name='Bala Raju' where rollno='24B11CS381';
